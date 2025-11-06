@@ -14,6 +14,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     baseURL: 'https://restful-booker.herokuapp.com',
 
+
   },
 
 

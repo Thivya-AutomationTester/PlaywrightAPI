@@ -1,30 +1,20 @@
 import { test } from '../fixtures/authentication';
-import { APIRequestContext, request, APIResponse } from '@playwright/test';
 const bookingPayload = JSON.parse(JSON.stringify(require("../utils/TestData.json")))
-let bookingid: number;
-let apiContext: APIRequestContext;
 
-test('Create Booking', async ({ apiContext }) => {
 
-  const bookingResponse: APIResponse = await apiContext.post("/booking"
-    , { data: bookingPayload[0] });
-  const bookingReponseJson = await bookingResponse.json();
-  bookingid = bookingReponseJson.bookingid;
-  console.log("Booking Id: ", bookingid);
-
-});
-test('Get Booking Info', async ({ apiContext }) => {
+test('01 - Get Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
 
   const bookingResponse = await apiContext.get(`/booking/${bookingid}`);
-  const bookingReponseJson = await bookingResponse.json();
-  console.log("Get Booking response: ", bookingReponseJson);
+  await assertResponse(bookingResponse);
 
 });
-test('Get All Booking Ids and check if created booking id is present', async ({ apiContext }) => {
+
+test('02 - Get All Booking Ids and check if created booking id is present', async ({ apiContext, bookingid, assertResponse }) => {
 
   const allBookingResponse = await apiContext.get("/booking");
   const allBookingReponseJson = await allBookingResponse.json();
-  console.log("Get All Booking ids: ", allBookingReponseJson);
+
+  await assertResponse(allBookingResponse);
   let flag: number = 0;
   for (const id of allBookingReponseJson) {
     if (id.bookingid === bookingid) {
@@ -40,27 +30,22 @@ test('Get All Booking Ids and check if created booking id is present', async ({ 
   }
 
 });
-test('Update Booking Info', async ({ apiContext }) => {
 
-
+test('03 - Update Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
   const updateBookingResponse = await apiContext.put(`/booking/${bookingid}`, {
     data: bookingPayload[1]
   });
-  const UpdatedReponseJson = await updateBookingResponse.json();
-  console.log(UpdatedReponseJson);
-
+  await assertResponse(updateBookingResponse);
 });
-test('Partial update Booking Info', async ({ apiContext }) => {
+
+test('04 - Partial update Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
   const partialUpdateResponse = await apiContext.patch(`/booking/${bookingid}`, {
     data: bookingPayload[2]
   });
-  const UpdatedReponseJson = await partialUpdateResponse.json();
-  console.log("Partial Update response: ", UpdatedReponseJson);
-
+  await assertResponse(partialUpdateResponse);
 });
-test('Delete Booking Info', async ({ apiContext }) => {
-  const deleteResponse = await apiContext.delete(`/booking/${bookingid}`);
-  const deletedReponse = await deleteResponse.text();
-  console.log("deletedResponse: ", deletedReponse);
 
+test('05 - Delete Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
+  const deleteResponse = await apiContext.delete(`/booking/${bookingid}`);
+  await assertResponse(deleteResponse, 'Created');
 });

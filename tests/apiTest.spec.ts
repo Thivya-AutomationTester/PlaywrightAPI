@@ -1,6 +1,6 @@
-import { test } from '../fixtures/authentication';
+import { test } from '../fixtures/test-fixtures';
 import { BookingHelpers } from '../utils/BookingHelpers';
-import bookingPayload from '../utils/TestData.json';
+import bookingPayload from '../utils/test-data.json';
 const [addBooking, updateBooking, partialBooking] = bookingPayload;
 
 

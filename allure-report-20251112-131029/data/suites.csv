@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","492","04 - Partial update Booking Info","","2025-11-12","passed","2025-11-12","","apiTest.spec.ts","",""
-"","1158","01 - Get Booking Info","","2025-11-12","passed","2025-11-12","","apiTest.spec.ts","",""
-"","6494","05 - Delete Booking Info","","2025-11-12","passed","2025-11-12","","apiTest.spec.ts","",""
-"","808","02 - Get All Booking Ids and check if created booking id is present","","2025-11-12","passed","2025-11-12","","apiTest.spec.ts","",""
-"","482","03 - Update Booking Info","","2025-11-12","passed","2025-11-12","","apiTest.spec.ts","",""

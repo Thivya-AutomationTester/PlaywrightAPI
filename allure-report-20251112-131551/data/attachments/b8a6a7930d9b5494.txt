@@ -1,8 +1,0 @@
-Response JSON:  {
-  firstname: 'Anil',
-  lastname: 'Kumar',
-  totalprice: 669,
-  depositpaid: true,
-  bookingdates: { checkin: '2020-10-11', checkout: '2019-08-01' },
-  additionalneeds: 'Lunch'
-}

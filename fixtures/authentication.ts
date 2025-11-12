@@ -1,5 +1,6 @@
-import { test as base, expect, request, APIResponse, APIRequestContext } from '@playwright/test';
-const Payload = JSON.parse(JSON.stringify(require("../utils/TestData.json")))
+import { test as base, request, APIResponse, APIRequestContext } from '@playwright/test';
+import Payload from '../utils/TestData.json';
+const [addBooking, , , credentials] = Payload;
 
 export const test = base.extend<{
     bookingid: number,
@@ -9,14 +10,14 @@ export const test = base.extend<{
     bookingid: async ({ request }, use) => {
 
         const bookingResponse = await request.post("/booking"
-            , { data: Payload[0] });
+            , { data: addBooking });
         const bookingReponseJson = await bookingResponse.json();
         let id: number = bookingReponseJson.bookingid;
         await use(id);
     },
     authToken: async ({ request }, use) => {
         const authResponse: APIResponse = await request.post("/auth"
-            , { data: Payload[3] });
+            , { data: credentials });
         const authReponseJson: any = await authResponse.json();
         const token = authReponseJson.token;
         // console.log("Token: ", token);

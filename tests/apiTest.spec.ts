@@ -1,11 +1,15 @@
 import { test } from '../fixtures/authentication';
-const bookingPayload = JSON.parse(JSON.stringify(require("../utils/TestData.json")))
+import { BookingHelpers } from '../utils/BookingHelpers';
+import bookingPayload from '../utils/TestData.json';
+const [addBooking, updateBooking, partialBooking] = bookingPayload;
 
 
 test('01 - Get Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
 
   const bookingResponse = await apiContext.get(`/booking/${bookingid}`);
   await assertResponse(bookingResponse);
+  const responseGet = await bookingResponse.json();
+  BookingHelpers.assertBookingDetails(responseGet, addBooking);
 
 });
 
@@ -33,16 +37,21 @@ test('02 - Get All Booking Ids and check if created booking id is present', asyn
 
 test('03 - Update Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
   const updateBookingResponse = await apiContext.put(`/booking/${bookingid}`, {
-    data: bookingPayload[1]
+    data: updateBooking
   });
   await assertResponse(updateBookingResponse);
+  const responseAfterUpdate = await updateBookingResponse.json();
+  BookingHelpers.assertBookingDetails(responseAfterUpdate, updateBooking);
 });
 
 test('04 - Partial update Booking Info', async ({ apiContext, bookingid, assertResponse }) => {
   const partialUpdateResponse = await apiContext.patch(`/booking/${bookingid}`, {
-    data: bookingPayload[2]
+    data: partialBooking
   });
   await assertResponse(partialUpdateResponse);
+  const responseAfterPartialUpdate = await partialUpdateResponse.json();
+  BookingHelpers.assertBookingDetails(responseAfterPartialUpdate, partialBooking);
+
 });
 
 test('05 - Delete Booking Info', async ({ apiContext, bookingid, assertResponse }) => {

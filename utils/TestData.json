@@ -11,19 +11,19 @@
         "additionalneeds": "Breakfast"
     },
     {
-        "firstname": "James",
-        "lastname": "Brown",
-        "totalprice": 111,
+        "firstname": "Anil",
+        "lastname": "Kumar",
+        "totalprice": 669,
         "depositpaid": true,
         "bookingdates": {
-            "checkin": "2018-01-01",
-            "checkout": "2019-01-01"
+            "checkin": "2020-10-11",
+            "checkout": "2019-08-01"
         },
-        "additionalneeds": "Breakfast"
+        "additionalneeds": "Lunch"
     },
     {
-        "firstname": "Tina",
-        "lastname": "Jonnes"
+        "firstname": "Lina",
+        "lastname": "Karol"
     },
     {
         "username": "admin",
